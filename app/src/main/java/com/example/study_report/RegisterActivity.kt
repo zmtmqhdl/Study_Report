@@ -28,6 +28,13 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
+        val inputID = binding.editId.text.toString()
+        val inputPW = binding.editPw.text.toString()
+        val inputNAME = binding.editName.text.toString()
+
+
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
