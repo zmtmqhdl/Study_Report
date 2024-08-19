@@ -1,6 +1,7 @@
 package com.example.study_report
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,11 @@ class BulletinBoardActivity : AppCompatActivity() {
 
         binding = ActivityBulletinBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.buttonPost.setOnClickListener {
+            val intent = Intent(this, PostActivity::class.java)
+            startActivity(intent)
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

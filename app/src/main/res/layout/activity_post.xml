@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="703dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         <EditText
             android:id="@+id/edit_comment"
             android:layout_width="400dp"
-            android:layout_height="550dp"
+            android:layout_height="500dp"
             android:layout_gravity="center"
             android:background="@drawable/button_round"
             android:ems="10"
@@ -46,10 +46,31 @@
             android:text=""
             android:textColorHint="#FF0000" />
 
+        <TextView
+            android:id="@+id/txtResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/button_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/button_round"
+                android:gravity="center"
+                android:text="업로드"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/button_register"
