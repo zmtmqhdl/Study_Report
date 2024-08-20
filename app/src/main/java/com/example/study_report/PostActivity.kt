@@ -1,63 +1,112 @@
 package com.example.study_report
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.study_report.databinding.ActivityPostBinding
-import android.net.Uri
-import java.io.File
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class PostActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPostBinding
 
+    private var fileUri: Uri? = null
+    private val PICK_FILE_REQUEST = 1
+
+    private val auth = FirebaseAuth.getInstance()
+    private val database = FirebaseDatabase.getInstance().reference
+    private val storage = FirebaseStorage.getInstance().reference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
         binding = ActivityPostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonUpload.setOnClickListener {
+        binding.buttonAttachFile.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "*/*"
-            intent.addCategory(Intent.CATEGORY_OPENABLE)
-            try {
-                startActivityForResult(Intent.createChooser(intent, "Select a file"), 100)
-            } catch (_: Exception) {
-                Toast.makeText(this, "Please install a file manager", Toast.LENGTH_LONG).show()
+            startActivityForResult(intent, PICK_FILE_REQUEST)
+        }
+
+        binding.buttonSubmit.setOnClickListener {
+            val title = binding.editTitle.text.toString().trim()
+            val content = binding.editContent.text.toString().trim()
+
+            if (title.isEmpty() || content.isEmpty()) {
+                Toast.makeText(this, "제목과 내용을 입력하세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val userId = auth.currentUser?.uid
+            val nicknameRef = userId?.let { database.child("users").child(it).child("name") }
+            nicknameRef?.get()?.addOnSuccessListener { snapshot ->
+                val nickname = snapshot.getValue(String::class.java) ?: "Unknown"
+                val currentTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
+                val postId = database.child("posts").push().key ?: return@addOnSuccessListener
+
+                val post = Post(
+                    title = title,
+                    content = content,
+                    userId = userId,
+                    userNickname = nickname,
+                    timestamp = currentTime
+                )
+
+                if (fileUri != null) {
+                    val fileRef = storage.child("posts/$postId/${fileUri!!.lastPathSegment}")
+                    fileRef.putFile(fileUri!!)
+                        .addOnSuccessListener {
+                            fileRef.downloadUrl.addOnSuccessListener { uri ->
+                                post.fileUrl = uri.toString()
+                                savePostToDatabase(postId, post)
+                            }
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this, "파일 업로드 실패", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    savePostToDatabase(postId, post)
+                }
+            }?.addOnFailureListener {
+                Toast.makeText(this, "사용자 정보를 가져오는 데 실패했습니다", Toast.LENGTH_SHORT).show()
             }
         }
-
-
-        binding.buttonRegister.setOnClickListener {
-            val intent = Intent(this, BulletinBoardActivity::class.java)
-            startActivity(intent)
-        }
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
     }
 
-    @Deprecated(message = "Deprecatred in Java")
-    override fun onActivityResult(
-        requestCode : Int, resultCode: Int,
-        data: Intent?
-    ) {
-        if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
-            val uri: Uri? = data.data
-            val path: String = uri?.path.toString()
-            val file = File(path)
-            binding.txtResult.text = "Path: $path File name: ${file.name}".trimIndent()
-        }
+    private fun savePostToDatabase(postId: String, post: Post) {
+        database.child("posts").child(postId).setValue(post)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "게시글 작성 완료", Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    Toast.makeText(this, "게시글 저장 실패", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_FILE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+            fileUri = data.data
+            Toast.makeText(this, "파일이 선택되었습니다", Toast.LENGTH_SHORT).show()
+        }
     }
-
 }
+
+data class Post(
+    val title: String = "",
+    val content: String = "",
+    val userId: String? = null,
+    val userNickname: String = "",
+    var fileUrl: String? = null,
+    val timestamp: String = ""
+)
