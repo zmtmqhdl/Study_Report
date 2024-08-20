@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "504905289875",
-    "project_id": "study-report-f9add",
-    "storage_bucket": "study-report-f9add.appspot.com"
+    "project_number": "551862011759",
+    "project_id": "study-report-c524f",
+    "storage_bucket": "study-report-c524f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:504905289875:android:992bee2b76e4868370bd66",
+        "mobilesdk_app_id": "1:551862011759:android:845f3d5c7e7f4e5b6f8a9a",
         "android_client_info": {
           "package_name": "com.example.study_report"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAu2vsVsHQpAYlrkANHVaM0Dr0PuhZ8fyg"
+          "current_key": "AIzaSyDgQQ9RRcJeMbl3HQhdSbEn5kbs_WnUxDA"
         }
       ],
       "services": {
