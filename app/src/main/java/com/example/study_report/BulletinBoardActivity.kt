@@ -1,35 +1,56 @@
 package com.example.study_report
 
-
+import BulletinPost
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.study_report.databinding.ActivityBulletinBoardBinding
-import com.example.study_report.databinding.ActivityRegisterBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 class BulletinBoardActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBulletinBoardBinding
+    private lateinit var adapter: PostAdapter
+    private val posts: MutableList<BulletinPost> = mutableListOf()
+    private val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("posts")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
         binding = ActivityBulletinBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonPost.setOnClickListener {
+        adapter = PostAdapter(posts)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter
+
+        loadPosts()
+
+        binding.fabAddPost.setOnClickListener {
             val intent = Intent(this, PostActivity::class.java)
             startActivity(intent)
         }
+    }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+    private fun loadPosts() {
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                posts.clear()
+                for (postSnapshot in snapshot.children) {
+                    val post = postSnapshot.getValue(BulletinPost::class.java)
+                    post?.let { posts.add(it) }
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle errors here
+            }
+        })
     }
 }
+
