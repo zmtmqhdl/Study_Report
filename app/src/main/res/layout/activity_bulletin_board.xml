@@ -20,12 +20,12 @@
 
     <Button
         android:id="@+id/fabAddPost"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_margin="16dp"
-        android:background="@drawable/button_circle"
+        android:background="@drawable/button_circle_black"
         android:text="+"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

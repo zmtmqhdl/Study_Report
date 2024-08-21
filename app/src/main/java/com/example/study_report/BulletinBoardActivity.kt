@@ -33,6 +33,9 @@ class BulletinBoardActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
 
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.recycler_view_item_spacing)
+        binding.recyclerView.addItemDecoration(VerticalSpaceItemDecoration(spacingInPixels))
+
         loadPosts()
 
         binding.fabAddPost.setOnClickListener {

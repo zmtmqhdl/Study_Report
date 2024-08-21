@@ -97,8 +97,15 @@ class PostActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_FILE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             fileUri = data.data
+            val fileName = fileUri?.let { getFileName(it) }
+            binding.textFileName.text = fileName ?: "파일 이름을 알 수 없음"
             Toast.makeText(this, "파일이 선택되었습니다", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun getFileName(uri: Uri): String {
+        val filePath = uri.path ?: return "Unknown"
+        return filePath.substring(filePath.lastIndexOf('/') + 1)
     }
 }
 
