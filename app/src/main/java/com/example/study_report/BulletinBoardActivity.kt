@@ -52,6 +52,7 @@ class BulletinBoardActivity : AppCompatActivity() {
                     val post = postSnapshot.getValue(BulletinPost::class.java)
                     post?.let { posts.add(it) }
                 }
+                posts.reverse()
                 adapter.notifyDataSetChanged()
             }
 

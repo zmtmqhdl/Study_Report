@@ -52,12 +52,13 @@ class PostActivity : AppCompatActivity() {
                 val currentTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
                 val postId = database.child("posts").push().key ?: return@addOnSuccessListener
 
+
                 val post = Post(
                     title = title,
                     content = content,
                     userId = userId,
                     userNickname = nickname,
-                    timestamp = currentTime
+                    timestamp = currentTime,
                 )
 
                 if (fileUri != null) {
@@ -73,6 +74,7 @@ class PostActivity : AppCompatActivity() {
                             Toast.makeText(this, "파일 업로드 실패", Toast.LENGTH_SHORT).show()
                         }
                 } else {
+                    post.fileUrl = 0.toString()
                     savePostToDatabase(postId, post)
                 }
             }?.addOnFailureListener {

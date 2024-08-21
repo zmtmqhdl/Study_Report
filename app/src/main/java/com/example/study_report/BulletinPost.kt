@@ -6,14 +6,14 @@ data class BulletinPost(
     val content: String = "",
     val userNickname: String = "",
     val timestamp: String = "",
-    val hasAttachment: Boolean = false
+    val fileUrl: String = ""
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readByte() != 0.toByte()
+        parcel.readString() ?: ""
     ) {
     }
 
@@ -22,7 +22,7 @@ data class BulletinPost(
         parcel.writeString(content)
         parcel.writeString(userNickname)
         parcel.writeString(timestamp)
-        parcel.writeByte(if (hasAttachment) 1 else 0)
+        parcel.writeString(fileUrl)
     }
 
     override fun describeContents(): Int {

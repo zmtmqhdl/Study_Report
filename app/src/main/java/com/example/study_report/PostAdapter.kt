@@ -34,7 +34,9 @@ class PostAdapter(
             binding.textAuthor.text = post.userNickname
             binding.textDate.text = post.timestamp
 
-            if (post.hasAttachment) {
+
+
+            if (post.fileUrl != "0") {
                 binding.iconAttachment.visibility = View.VISIBLE
             } else {
                 binding.iconAttachment.visibility = View.GONE

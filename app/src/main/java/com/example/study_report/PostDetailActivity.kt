@@ -1,6 +1,7 @@
 package com.example.study_report
 
 import BulletinPost
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -18,6 +19,11 @@ class PostDetailActivity : AppCompatActivity() {
         binding = ActivityPostDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.buttonDownload.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
         // Intent에서 BulletinPost 객체 가져오기
         val post = intent.getParcelableExtra<BulletinPost>("POST_KEY")
 
@@ -25,15 +31,14 @@ class PostDetailActivity : AppCompatActivity() {
         post?.let {
             binding.textTitle.text = it.title
             binding.textContent.text = it.content
-            binding.textAuthor.text = it.userNickname
-            binding.textDate.text = it.timestamp
+
 
             // 첨부파일 표시
-            if (it.hasAttachment) {
-                binding.imageAttachment.visibility = View.VISIBLE
+            if (it.fileUrl != "0") {
+                binding.buttonDownload.visibility = View.VISIBLE
                 // 첨부파일 이미지 설정 또는 파일 열기 처리 추가
             } else {
-                binding.imageAttachment.visibility = View.GONE
+                binding.buttonDownload.visibility = View.GONE
             }
         }
     }
