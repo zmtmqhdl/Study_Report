@@ -41,6 +41,7 @@
         android:layout_height="wrap_content"
         android:text="Author"
         android:textColor="@color/black"
+        android:layout_marginTop="20dp"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/textContent"
         android:textStyle="bold"/>
