@@ -35,7 +35,7 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
 
             if (inputID.isEmpty() || inputPW.isEmpty() || inputNAME.isEmpty()) {
-                Toast.makeText(this, "모든 필드를 채워주세요", Toast.LENGTH_SHORT).show()
+                binding.textAlarm.text = "모든 항목을 입력해주세요."
                 return@setOnClickListener
             }
 
@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
                             // 닉네임이 이미 존재할 경우
-                            Toast.makeText(this@RegisterActivity, "이미 사용 중인 닉네임입니다.", Toast.LENGTH_SHORT).show()
+                            binding.textAlarm.text = "이미 존재하는 닉네임입니다."
                         } else {
                             // 닉네임 중복이 없을 때 회원가입 진행
                             registerUser(inputID, inputPW, inputNAME, intent)
@@ -53,7 +53,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        Toast.makeText(this@RegisterActivity, "데이터베이스 에러: ${error.message}", Toast.LENGTH_SHORT).show()
+                        binding.textAlarm.text = "에러 발생! 관리자에게 문의해주세요."
                     }
                 })
         }
@@ -82,12 +82,12 @@ class RegisterActivity : AppCompatActivity() {
                                     Toast.makeText(this, "회원가입 완료", Toast.LENGTH_SHORT).show()
                                     startActivity(intent)
                                 } else {
-                                    Toast.makeText(this, "데이터베이스 저장 실패", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "에러 발생! 관리자에게 문의해주세요.", Toast.LENGTH_SHORT).show()
                                 }
                             }
                     }
                 } else {
-                    Toast.makeText(this, "회원가입 실패: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "에러 발생! 관리자에게 문의해주세요.", Toast.LENGTH_SHORT).show()
                 }
             }
     }

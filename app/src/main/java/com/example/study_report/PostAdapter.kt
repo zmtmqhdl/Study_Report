@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.study_report.databinding.ItemPostBinding
 
-class PostAdapter(private val posts: List<BulletinPost>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
+class PostAdapter(
+    private val posts: List<BulletinPost>,
+    private val onItemClick: (BulletinPost) -> Unit
+) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -17,6 +20,9 @@ class PostAdapter(private val posts: List<BulletinPost>) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = posts[position]
         holder.bind(post)
+        holder.itemView.setOnClickListener {
+            onItemClick(post)
+        }
     }
 
     override fun getItemCount(): Int = posts.size

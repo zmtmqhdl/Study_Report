@@ -24,7 +24,12 @@ class BulletinBoardActivity : AppCompatActivity() {
         binding = ActivityBulletinBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = PostAdapter(posts)
+        adapter = PostAdapter(posts) { post ->
+            val intent = Intent(this, PostDetailActivity::class.java).apply {
+                putExtra("POST_KEY", post)
+            }
+            startActivity(intent)
+        }
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
 
@@ -53,4 +58,3 @@ class BulletinBoardActivity : AppCompatActivity() {
         })
     }
 }
-

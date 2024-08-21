@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
             val inputPW = binding.editPw.text.toString().trim()
 
             if (inputID.isEmpty() || inputPW.isEmpty()) {
-                Toast.makeText(this, "모든 필드를 채워주세요", Toast.LENGTH_SHORT).show()
+                binding.textAlarm.text = "ID, PW를 모두 입력해주세요."
                 return@setOnClickListener
             }
 
@@ -44,10 +44,10 @@ class LoginActivity : AppCompatActivity() {
                         // 로그인 성공 시 BulletinBoardActivity로 이동
                         val intent = Intent(this, BulletinBoardActivity::class.java)
                         startActivity(intent)
-                        finish() // 현재 액티비티를 종료하여 로그인 상태를 유지
+                        finish()
                     } else {
                         // 로그인 실패 시 알림 메시지 표시
-                        binding.textAlarm.text = "잘못된 접속: ${task.exception?.message}"
+                        binding.textAlarm.text = "ID, PW를 확인해주세요."
                     }
                 }
         }
