@@ -19,13 +19,13 @@
   <img src="https://github.com/user-attachments/assets/29c6ff55-cb81-42ac-ab5b-47fb5760ac85" width="30%">  
   
   (3) 게시판 목록 화면 (게시물 우측 하단에 V표시가 되어있는 것은 첨부 파일이 있는 게시물입니다.)
-  <img src="https://github.com/user-attachments/assets/a0b2ed63-2910-422b-839e-e4edb29321b6" width="30%">  
+  <img src="https://github.com/user-attachments/assets/75b9db48-b232-422e-a216-aad9fc623dba" width="30%">  
 
-  (4) 스캔한 QR코드에 저장되어 있는 대중교통 식별코드에 맞춰 탑승한 나오는 대중교통의 좌석 배치도 (노란색 좌석이 비어있는 교통 약자석으로 누군가 탑승 중이라면 해당 좌석에 X가 나타나 선택이 불가합니다.)  
-  <img src="https://github.com/user-attachments/assets/669a225c-188e-4dc2-a051-0201593dbc70" width="30%">  
+  (4) 게시물 상세 화면 (파일 다운 버튼을 통해 첨부된 파일이 다운 가능합니다.)
+  <img src="https://github.com/user-attachments/assets/7f54b694-1e16-4385-9a34-1bbfbd0c9687" width="30%">  
 
-  (5) 좌석 선택 후 나오는 화면으로 하차 시 하차버튼을 누르게 되면 QR코드 촬영 화면으로 이동  
-  <img src="https://github.com/user-attachments/assets/418041d9-4aea-426f-ad1c-2747f748df3c" width="30%">
+  (5) 게시물 작성 화면 (파일 첨부 버튼을 통해 내부 저장소에 존재하는 파일을 게시물에 첨부할 수 있습니다.)
+  <img src="https://github.com/user-attachments/assets/5b3b1475-7cd2-4d2c-951b-fbac057354a1" width="30%">
 
 <br>
 
