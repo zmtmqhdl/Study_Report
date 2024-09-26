@@ -15,7 +15,7 @@
   (1) 로그인 화면  
   <img src="https://github.com/user-attachments/assets/664863d6-54b7-4f26-8f76-b437d568e6be" width="30%">  
 
-  (2) 회원가입 화면 
+  (2) 회원가입 화면  
   <img src="https://github.com/user-attachments/assets/29c6ff55-cb81-42ac-ab5b-47fb5760ac85" width="30%">  
   
   (3) 게시판 목록 화면 (게시물 우측 하단에 V표시가 되어있는 것은 첨부 파일이 있는 게시물입니다.)
