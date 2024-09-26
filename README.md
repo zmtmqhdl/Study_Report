@@ -18,13 +18,13 @@
   (2) 회원가입 화면  
   <img src="https://github.com/user-attachments/assets/29c6ff55-cb81-42ac-ab5b-47fb5760ac85" width="30%">  
   
-  (3) 게시판 목록 화면 (게시물 우측 하단에 V표시가 되어있는 것은 첨부 파일이 있는 게시물입니다.)
+  (3) 게시판 목록 화면 (게시물 우측 하단에 V표시가 되어있는 것은 첨부 파일이 있는 게시물입니다.)  
   <img src="https://github.com/user-attachments/assets/75b9db48-b232-422e-a216-aad9fc623dba" width="30%">  
 
-  (4) 게시물 상세 화면 (파일 다운 버튼을 통해 첨부된 파일이 다운 가능합니다.)
+  (4) 게시물 상세 화면 (파일 다운 버튼을 통해 첨부된 파일이 다운 가능합니다.)  
   <img src="https://github.com/user-attachments/assets/7f54b694-1e16-4385-9a34-1bbfbd0c9687" width="30%">  
 
-  (5) 게시물 작성 화면 (파일 첨부 버튼을 통해 내부 저장소에 존재하는 파일을 게시물에 첨부할 수 있습니다.)
+  (5) 게시물 작성 화면 (파일 첨부 버튼을 통해 내부 저장소에 존재하는 파일을 게시물에 첨부할 수 있습니다.)  
   <img src="https://github.com/user-attachments/assets/5b3b1475-7cd2-4d2c-951b-fbac057354a1" width="30%">
 
 <br>
