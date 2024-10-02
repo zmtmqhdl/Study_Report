@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/ec999ab0-e7d6-4499-ac51-e8c9cce858eb" width="50%">
+  <img src="https://github.com/user-attachments/assets/bb57927b-d536-48fb-95e4-58fd2da3f988" width="50%">
 </p>
 
 ## 🖥️ Study Report
